@@ -69,7 +69,7 @@ export const StyledCard = styled(Card)`
 export const StyledContainer = styled(Container)`
     padding: 20px 2px;
     height: 70vh;
-    background-Color: #02160b;
+    background-Color: ${(props) => props.bg? props.bg : '#02160b'};
 
 `
 

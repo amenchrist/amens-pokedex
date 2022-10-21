@@ -3,6 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { FlipCardDiv, FlipCardInnerDiv, FlipCardBackDiv, FlipCardFrontDiv,StyledCard } from "./styledComponents";
+import { Button, CardActions } from '@mui/material';
 
 function FlipCard({content}) {
   return (
@@ -28,9 +29,11 @@ function FlipCard({content}) {
                     <Typography>Height: {content.height*10}cm</Typography>
                     <Typography>Abilities: {content.abilities}</Typography>
                 </CardContent>
-                {/* <CardActions>
-                    <Button size="small">View</Button>
-                </CardActions> */}
+                <CardActions>
+                    
+                        <Button size="small">View</Button>
+                    
+                </CardActions>
             </StyledCard>
             </FlipCardBackDiv>
         </FlipCardInnerDiv>

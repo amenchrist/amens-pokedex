@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const StateContext = createContext();
 
+
 export const ContextProvider = ({ children }) => {
 
     const [pokedex, setPokedex ] = useState(() => {
@@ -10,7 +11,8 @@ export const ContextProvider = ({ children }) => {
     })
     const [ filteredList, setFilteredList ] = useState(pokedex);
     const [ loadNext, setLoadNext ] = useState(false);
-    const [ limit, setLimit ] = useState(9)
+    const [ limit, setLimit ] = useState(9);
+    const [ pokemon, setPokemon ] = useState({})
 
     function capitalize(word){
         return word.charAt(0).toUpperCase() + word.slice(1)
@@ -31,9 +33,9 @@ export const ContextProvider = ({ children }) => {
         if(pokedex.length < limit){
             for(let i=pokedex.length+1; i<=limit; i++){
               if(i >151){ break}
-                fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(result => result.json()).then(pokemon => {
+                fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(result => result.json()).then(pokemonDetails => {
                   
-                    const { id, name, height, weight, types, abilities } = pokemon
+                    const { id, name, height, weight, types, abilities } = pokemonDetails
                     const pok = {
                       id,
                       name: capitalize(name),
@@ -53,7 +55,7 @@ export const ContextProvider = ({ children }) => {
  
   const contextStateVars = {
 
-    filteredList, setFilteredList, pokedex, setLoadNext
+    filteredList, setFilteredList, pokedex, setLoadNext, pokemon, setPokemon
 
   }
 
