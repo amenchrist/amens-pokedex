@@ -1,10 +1,23 @@
-import Album from "./Album";
+
+import PokeList from "./components/PokeList";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import HeroSection from "./components/HeroSection";
+import { AppDiv } from "./components/styledComponents";
+
+const theme = createTheme();
 
 function App() {
+
+  
   return (
-    <div>
-      <Album />
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <AppDiv>
+      <HeroSection />
+      <PokeList />
+      </AppDiv>
+      </ThemeProvider>
   );
 }
 
