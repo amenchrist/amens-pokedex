@@ -20,7 +20,7 @@ function HeroSection() {
       <Container  align="center">
         
           <Typography
-            variant="h4"
+            variant="h5"
             component="a"
             href="/"
             sx={{
@@ -36,7 +36,7 @@ function HeroSection() {
           </Typography>
           <img src='../android-chrome-512x512.png' alt='logo' width={20} />
           <Typography
-            variant="h4"
+            variant="h5"
             component="a"
             href="/"
             sx={{

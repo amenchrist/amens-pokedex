@@ -39,7 +39,7 @@ export const ContextProvider = ({ children }) => {
                     const pok = {
                       id,
                       name: capitalize(name),
-                      imageUrl : pokemon.sprites.other['official-artwork']['front_default'],
+                      imageUrl : pokemonDetails.sprites.other['official-artwork']['front_default'],
                       height,
                       weight,
                       types: types.map(index => capitalize(index.type.name)).join(", "),
@@ -51,7 +51,7 @@ export const ContextProvider = ({ children }) => {
                 })
             }    
         }
-    },[pokedex, loadNext, limit])
+    },[pokedex, loadNext, limit,])
  
   const contextStateVars = {
 
