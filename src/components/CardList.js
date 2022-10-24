@@ -8,7 +8,6 @@ import { Link,  } from 'react-router-dom';
 function CardList() {
 
     const { filteredList} = useStateContext();
-    console.log(filteredList)
     filteredList.sort((a,b) => a.id - b.id)  
 
     function NotFound(){
