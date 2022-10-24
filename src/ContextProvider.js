@@ -36,6 +36,7 @@ export const ContextProvider = ({ children }) => {
                 fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(result => result.json()).then(pokemonDetails => {
                   
                     const { id, name, height, weight, types, abilities } = pokemonDetails
+                    console.log(pokemonDetails)
                     const pok = {
                       id,
                       name: capitalize(name),

@@ -16,6 +16,9 @@ export default function Router() {
         { path: '/pokemon/:id', element: <Details />  }, // specific pokemon   
         { path: '/', element: <Navigate to="/all" /> },
       ]
+    },
+    { 
+      path: '/all', element: <Navigate to="/" />
     }
   ];
 

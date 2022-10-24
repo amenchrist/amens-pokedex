@@ -1,5 +1,4 @@
 import React from 'react'
-import {  StyledContainer } from './styledComponents';
 import {  CardMedia, Grid, Typography } from '@mui/material';
 import { useStateContext } from '../ContextProvider';
 import { useParams } from 'react-router-dom';
@@ -15,8 +14,8 @@ function Details() {
 
 
   return (
-    <StyledContainer bg='white' maxWidth="md">
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div style={{backgroundColor: 'white', padding: '20px 20px'}}>
+        <div style={{display: 'flex', justifyContent: 'center', backgroundColor: 'white'}}>
             <Typography
             variant="h5"
             component="a"
@@ -36,7 +35,7 @@ function Details() {
 
             <CardMedia component="img" image={pokemon.imageUrl} alt={pokemon.name} style={{maxWidth: '300px'}} />
         </Grid>
-            <div style={{display: 'flex', flexDirection: 'column',  justifyContent: 'flex-end'}}>
+            <div style={{display: 'flex', flexDirection: 'column',  justifyContent: 'flex-end', backgroundColor: 'white'}}>
                 <Typography gutterBottom variant="h4" component="h3">
                     {pokemon.name}
                 </Typography>
@@ -45,12 +44,9 @@ function Details() {
                 <Typography >Weight: {pokemon.weight/10}kg</Typography>
                 <Typography >Height: {pokemon.height*10}cm</Typography>
                 <Typography >Abilities: {pokemon.abilities}</Typography>
-            </div>
-            
-            
-            
+            </div>           
         </div>
-    </StyledContainer>
+    </div>
   )
 }
 
