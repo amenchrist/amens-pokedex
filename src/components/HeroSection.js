@@ -64,7 +64,7 @@ function HeroSection() {
                 >
                 <TextField 
                 id="outlined-basic" 
-                label="Search Pokemon" 
+                label="Filter by name" 
                 variant="filled" 
                 onChange={(e)=> handleSearch(e.target.value)} 
                 style={{borderRadius: '5px', backgroundColor: 'white'}}
