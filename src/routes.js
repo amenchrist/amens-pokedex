@@ -18,7 +18,7 @@ export default function Router() {
       ]
     },
     { 
-      path: '/all', element: <Navigate to="/" />
+      path: '*', element: <Navigate to="/" />
     }
   ];
 

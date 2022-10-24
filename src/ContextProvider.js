@@ -46,8 +46,7 @@ export const ContextProvider = ({ children }) => {
                       types: types.map(index => capitalize(index.type.name)).join(", "),
                       abilities: abilities.map(index => capitalize(index.ability.name)).join(", ")
                     }
-                    pokemons.push(pok);
-                    pokemons.sort((a,b) => a.id - b.id)         
+                    pokemons.push(pok);     
                     setPokedex(pokemons);
                     setLoadNext(false);
                 })
