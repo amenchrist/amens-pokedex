@@ -24,35 +24,71 @@ export const ContextProvider = ({ children }) => {
     }, [pokedex])
 
     useEffect(() => {
-        let pokemons = [...pokedex];
-      
-        if(loadNext && limit < 151){
-          setLimit(limit+6)
+
+
+      console.log('mounting fetcher')
+
+      const controller = new AbortController();
+      const signal = controller.signal;
+
+      let pokemons = [...pokedex];
+    
+      if(loadNext && limit < 151){
+        setLimit(limit+6)
+      }
+
+      if(pokedex.length < limit){
+        let startingPoint = 1;
+        pokedex.length > 0 ? startingPoint = pokedex.length + 1 : startingPoint = 1;
+
+        async function retrievePokemon(){
+
+          const options = {
+            signal: signal,
+          }
+
+          for(let i=startingPoint; i<=limit; i++){
+            if(i >151){ break}
+            console.log('Fetching pokemon', i)
+
+            try{
+              const pokemonJson = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`, options);
+              console.log(pokemonJson)
+              const pokemonDetails = await pokemonJson.json()
+              console.log('received pokemon ', i)
+              console.log(pokemonDetails.name, pokemonDetails.id)
+                const { id, name, height, weight, types, abilities } = pokemonDetails
+                const pok = {
+                  id,
+                  name: capitalize(name),
+                  imageUrl : pokemonDetails.sprites.other['official-artwork']['front_default'],
+                  height,
+                  weight,
+                  types: types.map(index => capitalize(index.type.name)).join(", "),
+                  abilities: abilities.map(index => capitalize(index.ability.name)).join(", ")
+                }
+                pokemons.push(pok);     
+                setPokedex(pokemons);
+                setLoadNext(false);
+
+            }catch (e){
+              // console.log('something went wrong')
+              // console.log(e)
+            }
+
+              
+          } 
+          
         }
 
-        if(pokedex.length < limit){
-          let startingPoint;
-          pokedex.length > 0 ? startingPoint = pokedex.length + 1 : startingPoint = 1
-            for(let i=startingPoint; i<=limit; i++){
-              if(i >151){ break}
-                fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(result => result.json()).then(pokemonDetails => {
-                  
-                    const { id, name, height, weight, types, abilities } = pokemonDetails
-                    const pok = {
-                      id,
-                      name: capitalize(name),
-                      imageUrl : pokemonDetails.sprites.other['official-artwork']['front_default'],
-                      height,
-                      weight,
-                      types: types.map(index => capitalize(index.type.name)).join(", "),
-                      abilities: abilities.map(index => capitalize(index.ability.name)).join(", ")
-                    }
-                    pokemons.push(pok);     
-                    setPokedex(pokemons);
-                    setLoadNext(false);
-                })
-            }    
-        }
+        retrievePokemon()
+
+      }
+      return () => {
+        // console.log("unmounting fetcher")
+        //cancel the request before the component unmounts
+        controller.abort();
+      }
     },[pokedex, loadNext, limit,])
  
   const contextStateVars = {
