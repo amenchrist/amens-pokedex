@@ -31,7 +31,9 @@ export const ContextProvider = ({ children }) => {
         }
 
         if(pokedex.length < limit){
-            for(let i=pokedex.length+1; i<=limit; i++){
+          let startingPoint;
+          pokedex.length > 0 ? startingPoint = pokedex.length + 1 : startingPoint = 1
+            for(let i=startingPoint; i<=limit; i++){
               if(i >151){ break}
                 fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(result => result.json()).then(pokemonDetails => {
                   
