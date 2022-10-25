@@ -25,8 +25,7 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
 
-
-      console.log('mounting fetcher')
+      console.log('mounting fetcher');
 
       const controller = new AbortController();
       const signal = controller.signal;
@@ -34,7 +33,11 @@ export const ContextProvider = ({ children }) => {
       let pokemons = [...pokedex];
     
       if(loadNext && limit < 151){
-        setLimit(limit+6)
+        if(limit+6 > 151){
+          setLimit(151)
+        } else {
+          setLimit(limit+6)
+        }
       }
 
       if(pokedex.length < limit){
@@ -49,11 +52,10 @@ export const ContextProvider = ({ children }) => {
 
           for(let i=startingPoint; i<=limit; i++){
             if(i >151){ break}
-            console.log('Fetching pokemon', i)
-
+            
             try{
               const pokemonJson = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`, options);
-              console.log(pokemonJson)
+              console.log('Fetching pokemon', i)
               const pokemonDetails = await pokemonJson.json()
               console.log('received pokemon ', i)
               console.log(pokemonDetails.name, pokemonDetails.id)
@@ -68,28 +70,35 @@ export const ContextProvider = ({ children }) => {
                   abilities: abilities.map(index => capitalize(index.ability.name)).join(", ")
                 }
                 pokemons.push(pok);     
-                setPokedex(pokemons);
-                setLoadNext(false);
 
             }catch (e){
               // console.log('something went wrong')
               // console.log(e)
             }
 
-              
+            // console.log(`limit is ${limit}`)
+            // console.log(`pokemons.length is ${pokemons.length}`)
+
+            if(pokemons.length === limit){
+              // console.log("setting pokedex")
+              setPokedex(pokemons);
+              setLoadNext(false);
+            }
+
           } 
           
         }
 
         retrievePokemon()
 
-      }
+      }      
+
       return () => {
-        // console.log("unmounting fetcher")
+        console.log("unmounting fetcher")
         //cancel the request before the component unmounts
         controller.abort();
       }
-    },[pokedex, loadNext, limit,])
+    },[pokedex, loadNext, limit])
  
   const contextStateVars = {
 
