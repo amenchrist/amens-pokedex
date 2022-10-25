@@ -12,13 +12,10 @@ export default function Router() {
       path: '/',
       element: <PokeList />,//Header and Hero section
       children:[
-        { path: 'all', element: <CardList />},//all pokemon
+        { index: true, element: <CardList />},//all pokemon
         { path: '/pokemon/:id', element: <Details />  }, // specific pokemon   
-        { path: '/', element: <Navigate to="/all" /> },
+        { path: '*', element: <Navigate to="/" /> }
       ]
-    },
-    { 
-      path: '*', element: <Navigate to="/" />
     }
   ];
 
