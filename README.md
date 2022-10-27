@@ -1,3 +1,15 @@
+# CODE TEST NOTE. EXAMINER PLEASE READ!
+Good day Sir/Madam,
+
+I just wanted to note a few changes since the code test was first submitted. Below is a direct link to the commit that was submitted for the test.
+
+However, since the due date for the test I have made a couple of changes because I was enjoying the project and thought to try different ways of implementing the results or adding more to the project. Unfortunately, that resulted in some versions of the project having fetch errors due to a change in the variable names whilst trying to split the code to improve load performance.
+
+I have fixed the bugs but I wanted to make sure the submitted code was the one being reviewed.
+
+Thank you for your consideration.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
